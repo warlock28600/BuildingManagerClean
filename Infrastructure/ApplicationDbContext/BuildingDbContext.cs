@@ -1,11 +1,11 @@
-﻿
+﻿using BuldingManager.ApplicationDbContext;
 using Domain.Entities;
 using Infrastructure.Functions;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Data.Common;
 
-namespace BuldingManager.ApplicationDbContext;
+namespace Infrastructure.ApplicationDbContext;
 
 public partial class BuildingDbContext:DbContext
 {

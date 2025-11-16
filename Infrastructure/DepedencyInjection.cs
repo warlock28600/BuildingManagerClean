@@ -1,9 +1,8 @@
-﻿using BuldingManager.ApplicationDbContext;
+﻿using Infrastructure.ApplicationDbContext;
 using Infrastructure.Extentions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using MyProject.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +21,7 @@ namespace Infrastructure
 
             services.AddJwtAuthentication(configuration);
             services.AddSwaggerWithJwt(configuration);
+            services.AddApplicationRepositories();
             return services;
         }
     }

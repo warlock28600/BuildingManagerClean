@@ -7,7 +7,7 @@ public interface IUnitRepository
 {
     public Task<IEnumerable<UnitEntity>> GetAllUnits();
     public Task<UnitEntity> GetUnitById(int id);
-    public Task CreateUnit( UnitEntity unit);
-    public Task UpdateUnit( int id ,UnitCreateDto unit);
-    public Task DeleteUnit(int id);
+    public Task<bool> CreateUnit( UnitEntity unit);
+    public Task<bool> UpdateUnit( int id ,UnitEntity unit);
+    public Task<bool> DeleteUnit(int id);
 }

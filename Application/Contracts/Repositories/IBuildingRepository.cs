@@ -7,7 +7,7 @@ public interface IBuildingRepository
 {
     Task<IEnumerable<Domain.Entities.Building>> GetBuildingsAsync();
     Task<Domain.Entities.Building> GetBuildingAsync(int id);
-    Task CreateAsync(BuildingCreateDto building);
-    Task UpdateAsync(int id,BuildingCreateDto building);
-    Task DeleteAsync(int id);
+    Task<bool> CreateAsync(Building building);
+    Task<bool> UpdateAsync(int id,Building building);
+    Task<bool> DeleteAsync(int id);
 }

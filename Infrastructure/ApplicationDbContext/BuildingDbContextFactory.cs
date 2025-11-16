@@ -1,4 +1,5 @@
-﻿using BuldingManager.ApplicationDbContext;
+﻿
+using Infrastructure.ApplicationDbContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
@@ -22,7 +23,7 @@ public class BuildingDbContextFactory : IDesignTimeDbContextFactory<BuildingDbCo
 
         Console.WriteLine("File exists: " + File.Exists(Path.Combine(apiPath, "appsettings.json")));
 
-        var optionsBuilder = new DbContextOptionsBuilder<BuildingDbContext>();
+        var optionsBuilder = new DbContextOptionsBuilder<Infrastructure.ApplicationDbContext.BuildingDbContext>();
         var connectionString = config.GetConnectionString("SqlServerConnection");
 
         Console.WriteLine("connection: " + connectionString);
