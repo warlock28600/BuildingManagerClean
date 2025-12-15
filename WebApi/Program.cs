@@ -1,5 +1,7 @@
 using Application;
+using BuldingManager.Extentions;
 using Infrastructure;
+using MyProject.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +14,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddApplication()
                 .AddInfrastructure(builder.Configuration);
+// builder.Services.AddSwaggerWithJwt(builder.Configuration);
+// builder.Services.AddJwtAuthentication(builder.Configuration);
 
 var app = builder.Build();
 
