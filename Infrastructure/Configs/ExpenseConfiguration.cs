@@ -8,9 +8,9 @@ namespace Infrastructure.Configs
     {
         public void Configure(EntityTypeBuilder<Expense> builder)
         {
-            builder.Property(e => e.Title).HasMaxLength(100).IsRequired().HasColumnType("varchar(100)");
+            builder.Property(e => e.Title).HasMaxLength(100).IsRequired().HasColumnType("nvarchar(100)");
             builder.Property(e => e.Amount).IsRequired().HasColumnType("decimal(18,2)");
-            builder.Property(e => e.Description).HasMaxLength(500).HasColumnType("varchar(500)");
+            builder.Property(e => e.Description).HasMaxLength(500).HasColumnType("nvarchar(500)");
             builder.Property(e => e.ExpanseType).IsRequired().HasColumnType("int");
             builder.HasOne(e => e.Attribute)
                    .WithMany(a => a.Expenses)
