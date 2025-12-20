@@ -1,6 +1,7 @@
 ﻿using Application.Dto;
 using Application.Dto.AttributeType;
 using Application.Dto.Unit;
+using Application.Dto.UnitExpense;
 using Application.Dto.UnitOwner;
 using AutoMapper;
 using Domain.Entities;
@@ -69,6 +70,11 @@ namespace Application.Profiles
             #region Unit Profiles
             CreateMap<UnitCreateDto, UnitEntity>().ReverseMap();
             CreateMap<UnitGetDto, UnitEntity>().ReverseMap();
+            #endregion
+            
+            #region UnitExpenses Profiles
+            CreateMap<UnitExpense, UnitGetDto>().ReverseMap();
+            CreateMap<UnitExpense, UnitExpenseCreateDto>().ReverseMap();
             #endregion
         }
     }

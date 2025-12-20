@@ -16,4 +16,5 @@ public partial class BuildingDbContext : DbContext
     public DbSet<Domain.Entities.Compounds> Compounds { get; set; }
     public DbSet<Domain.Entities.FinancialPeriod> FinancialPeriods { get; set; }
     public DbSet<Domain.Entities.Expense> Expenses { get; set; }
+    public DbSet<UnitExpense> UnitExpenses { get; set; }
 }
