@@ -2,11 +2,13 @@ using Application.Contracts.Repositories;
 using Application.Contracts.Services;
 using Application.Dto.UnitExpense;
 using AutoMapper;
+using Domain.Entities;
 
 namespace Application.Services;
 
 public class UnitExpenseService:IUnitExpenseService
 {
+    #region Constructor
     private readonly IUnitExpenseRepository _unitExpenseRepository;
     private readonly IMapper _mapper;
 
@@ -15,8 +17,9 @@ public class UnitExpenseService:IUnitExpenseService
         _unitExpenseRepository = unitExpenseRepository;
         _mapper = mapper;
     }
-
-
+    #endregion
+    
+    #region Get Methods
     public async Task<IEnumerable<UnitExpenseGetDto>> getAll()
     {
         var unitExpense = await _unitExpenseRepository.GetAll();
@@ -28,19 +31,29 @@ public class UnitExpenseService:IUnitExpenseService
         var unitExpense = await _unitExpenseRepository.Get(id);
         return _mapper.Map<UnitExpenseGetDto>(unitExpense);
     }
+    #endregion
 
-    public Task<bool> CreateUnitExpanse(UnitExpenseCreateDto unitExpenseCreateDto)
+    #region Create Methods
+    public async Task<bool> CreateUnitExpanse(UnitExpenseCreateDto unitExpenseCreateDto)
     {
-        throw new NotImplementedException();
+        var created= await _unitExpenseRepository.Add(_mapper.Map<UnitExpense>(unitExpenseCreateDto));
+        return created;
     }
+    #endregion
 
+    #region Update Methods
     public Task<bool> UpdateUnitExpanse(int id, UnitExpenseCreateDto unitExpenseCreateDto)
     {
-        throw new NotImplementedException();
+        var updated = _unitExpenseRepository.Update(id, _mapper.Map<UnitExpense>(unitExpenseCreateDto));
+        return updated;
     }
+    #endregion
 
+    #region Delete Methods
     public Task<bool> DeleteUnitExpanse(int id)
     {
-        throw new NotImplementedException();
+        var deleted = _unitExpenseRepository.Delete(id);
+        return deleted;
     }
+    #endregion
 }
