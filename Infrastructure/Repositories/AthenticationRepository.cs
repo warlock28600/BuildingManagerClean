@@ -9,22 +9,28 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Extensions.Configuration;
 using Application.Contracts.Repositories;
+using Microsoft.Extensions.Logging;
 
 namespace Infrastructure.Repositories;
 
 public class AthenticationRepository:IAthenticationRepository
 {
+    #region Constructor
     private readonly ApplicationDbContext.BuildingDbContext _context;
     private readonly IMapper _mapper;
     private readonly IConfiguration _configuration;
+    private readonly ILogger<AthenticationRepository> _logger;
     
-    public AthenticationRepository( BuildingDbContext context,IMapper mapper,IConfiguration configuration)
+    public AthenticationRepository( BuildingDbContext context,IMapper mapper,IConfiguration configuration, ILogger<AthenticationRepository> logger)
     {
         _context = context;
         _mapper = mapper;
         _configuration = configuration;
+        _logger = logger;
     }
+    #endregion
     
+    #region Register Method
     public async Task<TokenDto> RegisterAsync(UserRegisterDto user)
     {
         if (_context.Users.Any(u => u.UserName == user.UserName))
@@ -52,18 +58,25 @@ public class AthenticationRepository:IAthenticationRepository
         
         return tokenDto;
     }
+    #endregion
 
+    #region Login Method
     public async Task<TokenDto> LoginAsync(LoginDto loginDto)
     {
         var user = await _context.Users.Include(u => u.Person)
             .FirstOrDefaultAsync(u => u.UserName == loginDto.UserName);
-        
+
         if (user == null || !BCrypt.Net.BCrypt.Verify(loginDto.Password, user.Password))
+        {
             throw new Exception("Invalid credentials");
+            _logger.LogError("Invalid credentials");
+        }
+            
 
         if (user.IsActive == false)
         {
             throw new Exception("User is not active");
+            _logger.LogInformation("User is not active");
         }
 
         var tokenDto = new TokenDto
@@ -73,8 +86,9 @@ public class AthenticationRepository:IAthenticationRepository
         
         return tokenDto;
     }
+    #endregion
     
-    
+    #region GenerateJwtToken
     private string GenerateJwtToken(Users user)
     {
         var claims = new[]
@@ -97,4 +111,5 @@ public class AthenticationRepository:IAthenticationRepository
 
         return new JwtSecurityTokenHandler().WriteToken(token);
     }
+    #endregion
 }
