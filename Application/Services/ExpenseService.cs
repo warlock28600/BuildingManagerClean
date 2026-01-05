@@ -3,7 +3,7 @@ using Application.Contracts.Services;
 using Application.Dto.Expense;
 using AutoMapper;
 
-namespace BuldingManager.Services.Expense
+namespace Application.Services
 {
     public class ExpenseService : IExpenseService
     {

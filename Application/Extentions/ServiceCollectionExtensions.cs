@@ -6,7 +6,6 @@ using Application.Services;
 using AutoMapper;
 using BuldingManager.Services.AttributeType;
 using BuldingManager.Services.Building;
-using BuldingManager.Services.Expense;
 using BuldingManager.Services.FinancialPeriod;
 using BuldingManager.Services.UnitOwner;
 using Microsoft.Extensions.DependencyInjection;
