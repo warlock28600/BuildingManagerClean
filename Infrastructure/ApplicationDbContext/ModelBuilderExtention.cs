@@ -20,5 +20,6 @@ public static class ModelBuilderExtention
         modelBuilder.ApplyConfiguration(new FinancialPeriodConfiguration());
         modelBuilder.ApplyConfiguration(new CompoundEntityConfiguration());
         modelBuilder.ApplyConfiguration(new ResidentEntityConfiguration());
+        modelBuilder.ApplyConfiguration(new UnitExpenseConfiguration());
     }
 }

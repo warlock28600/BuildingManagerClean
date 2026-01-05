@@ -13,6 +13,7 @@ namespace Application.Dto.Expense
         public decimal Amount { get; set; }
         public string Description { get; set; }
         public int FinancialPeriodId { get; set; }
+        public int BuildingId { get; set; }
         public int AttributeId { get; set; }
 
         public ExpanseType ExpanseType { get; set; }

@@ -174,6 +174,9 @@ namespace Infrastructure.Migrations
                     b.Property<decimal>("Amount")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<int>("BuildingId")
+                        .HasColumnType("int");
+
                     b.Property<int>("CostTypeId")
                         .HasColumnType("int");
 
@@ -194,6 +197,8 @@ namespace Infrastructure.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BuildingId");
 
                     b.HasIndex("CostTypeId");
 
@@ -424,7 +429,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("UnitId");
 
-                    b.ToTable("UnitExpense");
+                    b.ToTable("UnitExpenses");
                 });
 
             modelBuilder.Entity("Domain.Entities.UnitOwner", b =>
@@ -550,6 +555,12 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Domain.Entities.Expense", b =>
                 {
+                    b.HasOne("Domain.Entities.Building", "Building")
+                        .WithMany("Expenses")
+                        .HasForeignKey("BuildingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Domain.Entities.Attribute", "Attribute")
                         .WithMany("Expenses")
                         .HasForeignKey("CostTypeId")
@@ -563,6 +574,8 @@ namespace Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Attribute");
+
+                    b.Navigation("Building");
 
                     b.Navigation("FinancialPeriod");
                 });
@@ -610,13 +623,13 @@ namespace Infrastructure.Migrations
                     b.HasOne("Domain.Entities.Expense", "Expense")
                         .WithMany("UnitExpense")
                         .HasForeignKey("ExpenseId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("Domain.Entities.UnitEntity", "Unit")
                         .WithMany("UnitExpenses")
                         .HasForeignKey("UnitId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Expense");
@@ -666,6 +679,8 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Domain.Entities.Building", b =>
                 {
+                    b.Navigation("Expenses");
+
                     b.Navigation("Units");
                 });
 

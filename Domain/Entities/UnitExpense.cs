@@ -1,4 +1,6 @@
-﻿namespace Domain.Entities
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Domain.Entities
 {
     public class UnitExpense
     {
@@ -8,7 +10,9 @@
         public decimal Amount { get; set; }
 
         #region Navigation Properties
+        [ForeignKey("ExpenseId")]
         public Expense Expense { get; set; }
+        [ForeignKey("UnitId")]
         public UnitEntity Unit { get; set; }
         #endregion
     }
