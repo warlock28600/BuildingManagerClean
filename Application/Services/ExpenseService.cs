@@ -26,6 +26,31 @@ namespace Application.Services
         public async Task<bool> CreateExpense(ExpenceCreateDto expenseCreateDto)
         {
             var expense = _mapper.Map<Domain.Entities.Expense>(expenseCreateDto);
+            
+            
+            var units= await _unitService.GetUnitByBuildingId(expenseCreateDto.BuildingId);
+            if (units.Count > 0 )
+            {
+                for (int i = 0; i < units.Count; i++)
+                {
+                    if (expense.ExpanseType == Domain.Statics.ExpanseType.ByArea)
+                    {
+                        
+
+                    }
+
+                    if (expense.ExpanseType == Domain.Statics.ExpanseType.ByPersons)
+                    {
+                        
+                    }
+
+                    if (expense.ExpanseType == Domain.Statics.ExpanseType.Equal)
+                    {
+                        
+                    }                    
+                    
+                }
+            }
             return await  _expenseRepo.CreateExpenseAsync(expense);
         }
         #endregion

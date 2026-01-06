@@ -35,6 +35,12 @@ public class UnitRepository:IUnitRepository
         return units;
     }
 
+    public Task<List<UnitEntity>> GetUnitByBuildingId(int buildingId)
+    {
+        var units = _context.UnitEntities.Where(u => u.BuildingId == buildingId).ToListAsync();
+        return units;
+    }
+
     public async Task<UnitEntity> GetUnitById(int id)
     {
         var unit = await _context.UnitEntities.SingleOrDefaultAsync(u => u.UnitId==id);
@@ -46,6 +52,8 @@ public class UnitRepository:IUnitRepository
         return unit;
         
     }
+    
+    
     #endregion
 
     #region create method

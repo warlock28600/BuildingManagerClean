@@ -21,6 +21,12 @@ public class UnitService:IUnitService
         return _imapper.Map<UnitGetDto>(unit);
     }
 
+    public async Task<List<UnitGetDto>> GetUnitByBuildingId(int buildingId)
+    {
+       var unit = await _unitRepository.GetUnitByBuildingId(buildingId);
+       return _imapper.Map<List<UnitGetDto>>(unit);
+    }
+
     public async Task<IEnumerable<UnitGetDto>> GetUnitsAsync()
     {
         var units = await _unitRepository.GetAllUnits();
